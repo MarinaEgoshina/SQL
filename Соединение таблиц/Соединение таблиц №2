@@ -16,21 +16,6 @@ ON products.art = positions.art
 WHERE positions.id_check IS NULL;
 
 /*Посчитайте количество чеков, в которых куплено больше двух пар одинаковой обуви.*/
-SELECT *FROM positions;
-SELECT *FROM products;
-
-SELECT COUNT(*)id_check  
-FROM positions
-INNER JOIN ( 
-	SELECT art,
-	       product
-	FROM products
-	WHERE category = 'обувь'	
-)products
-ON products.art = positions.art
-WHERE positions.quantity > 2;
-   
---По доп заданию 3 можно было без подзапроса:
 SELECT COUNT(DISTINCT ps.id_check) as kol_vo_chekov
 FROM Positions ps
 JOIN Products p on ps.art = p.art 
@@ -40,17 +25,6 @@ WHERE p.category = 'обувь' and ps.quantity > 2;
 SELECT *FROM positions;
 SELECT *FROM products;
 
-SELECT COUNT(DISTINCT id_check) 
-FROM positions
-INNER JOIN ( 
-	SELECT art,
-	       product
-    FROM products 
-    WHERE category = 'одежда'
-) products
-ON products.art = positions.art
-WHERE positions.id_check >2;
--- правильный ответ 
 SELECT count(*)
 FROM (SELECT positions.id_check
       FROM products 
